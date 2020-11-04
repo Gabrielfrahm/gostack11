@@ -1,0 +1,36 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js init
+
+PATH: 
+  C:\Users\Gabri\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Gabri\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Python27;C:\Python27\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\wamp64\bin\php\php7.3.12;C:\composer;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files\nodejs;C:\Users\Gabri\AppData\Local\Microsoft\WindowsApps;C:\Users\Gabri\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Gabri\AppData\Roaming\Composer\vendor\bin;C:\Dev\flutter\bin;C:\Dev\flutter\bin\cache\dart-sdk\bin;C:\Users\Gabri\AppData\Local\Microsoft\WindowsApps;C:\Users\Gabri\AppData\Local\Yarn\bin;C:\Users\Gabri\AppData\Roaming\npm;C:\Android\tools\bin\platform-tools;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  14.6.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:137008:13)
+      at Interface.emit (events.js:314:20)
+      at Interface._ttyWrite (readline.js:875:16)
+      at ReadStream.onkeypress (readline.js:213:10)
+      at ReadStream.emit (events.js:314:20)
+      at emitKeys (internal/readline/utils.js:335:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1144:36)
+      at ReadStream.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:303:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
