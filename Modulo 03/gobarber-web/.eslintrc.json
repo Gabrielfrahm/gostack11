@@ -32,8 +32,10 @@
   "rules": {
     "camelcase": "off",
     "react/jsx-one-expression-per-line": "off",
+    "@typescript-eslint/ban-types": "off",
     "no-use-before-define": "off",
     "react/jsx-props-no-spreading": "off",
+    "no-unused-expression": "off",
     "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
