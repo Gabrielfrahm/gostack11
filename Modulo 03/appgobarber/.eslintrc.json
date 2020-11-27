@@ -36,11 +36,6 @@
       "import/prefer-default-export": "off",
       "no-unused-expressions": "off",
       "prettier/prettier": "error",
-      "settings": {
-        "import/resolver": {
-          "typescript": {}
-        }
-      },
       "import/extensions": [
         "error",
         "ignorePackages",
@@ -49,5 +44,10 @@
           "tsx": "never"
         }
       ]
-    }
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
 }
