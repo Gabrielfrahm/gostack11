@@ -12,12 +12,23 @@ import AppointmentsRepository from '@modules/appointments/infra/typeorm/reposito
 import IUserRepository from '@modules/users/repositories/IUserRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
+import IUserTokenRepository from '@modules/users/repositories/IUserTokenRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+
+// appointments agendamentos
 container.registerSingleton<IAppointmentRepository>(
   'AppointmentsRepository',
   AppointmentsRepository,
 );
 
+// users  usuarios
 container.registerSingleton<IUserRepository>(
   'UsersRepository',
   UsersRepository,
+);
+
+// user tokens
+container.registerSingleton<IUserTokenRepository>(
+  'UserTokenRepository',
+  UserTokensRepository,
 );
