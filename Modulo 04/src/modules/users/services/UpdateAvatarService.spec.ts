@@ -4,16 +4,22 @@ import FakerUserRepository from '../repositories/fakes/FakeUserRepository';
 
 import UpdateAvatarService from './UpdateAvatarService';
 
-describe('UpdateUserAvatar', () => {
-  it('Should be able to update avatar with  User', async () => {
-    const fakeUserRepository = new FakerUserRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
+let fakeUserRepository: FakerUserRepository;
+let fakeStorageProvider: FakeStorageProvider;
+let updateUserAvatarService: UpdateAvatarService;
 
-    const updateUserAvatarService = new UpdateAvatarService(
+describe('UpdateUserAvatar', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakerUserRepository();
+    fakeStorageProvider = new FakeStorageProvider();
+
+    updateUserAvatarService = new UpdateAvatarService(
       fakeUserRepository,
       fakeStorageProvider,
     );
+  });
 
+  it('Should be able to update avatar with  User', async () => {
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -29,14 +35,6 @@ describe('UpdateUserAvatar', () => {
   });
 
   it('Should not  be able to update avatar from non existing user', async () => {
-    const fakeUserRepository = new FakerUserRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
-    const updateUserAvatarService = new UpdateAvatarService(
-      fakeUserRepository,
-      fakeStorageProvider,
-    );
-
     await expect(
       updateUserAvatarService.execute({
         user_id: 'non-existing-user',
@@ -46,15 +44,8 @@ describe('UpdateUserAvatar', () => {
   });
 
   it('Should delete old avatar when updating new one ', async () => {
-    const fakeUserRepository = new FakerUserRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
 
-    const updateUserAvatarService = new UpdateAvatarService(
-      fakeUserRepository,
-      fakeStorageProvider,
-    );
     const user = await fakeUserRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
