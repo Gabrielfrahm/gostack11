@@ -23,6 +23,14 @@ class Appointment {
   provider: User;
 
   @Column()
+  user_id: string;
+
+  @ManyToOne(() => User)
+  // qual é a coluna que vai identificar qual o prestador de serviço
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @Column()
   date: Date;
 
   @CreateDateColumn()
