@@ -1,7 +1,10 @@
 import 'reflect-metadata';
+import 'dotenv/config';
+
 import '@shared/infra/typeorm';
 import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
+import { errors } from 'celebrate';
 import cors from 'cors';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/error/AppError';
@@ -14,6 +17,10 @@ app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
+// erro do celebrate dando uma resposta dos erros de validação body etc
+app.use(errors());
+
+// mensagem de erro nas requisições http transformando dinâmica
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
