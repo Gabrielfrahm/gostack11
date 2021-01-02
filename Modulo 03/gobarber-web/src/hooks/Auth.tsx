@@ -1,9 +1,14 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../service/api';
 
+interface User {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
 interface AuthState {
   token: string;
-  userWithoutPassword: object;
+  userWithoutPassword: User;
 }
 
 interface SignInCredentials {
@@ -12,7 +17,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: object;
+  user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
