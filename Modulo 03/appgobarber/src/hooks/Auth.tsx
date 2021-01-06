@@ -3,18 +3,28 @@ import asyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import AsyncStorage from '@react-native-community/async-storage';
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar_url: string;
+}
 interface AuthState {
   token: string;
-  userWithoutPassword: object;
+  userWithoutPassword: User;
 }
+
+
 
 interface SignInCredentials {
   email: string;
   password: string;
 }
 
+
+
 interface AuthContextData {
-  user: object;
+  user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
   loading:  boolean;
@@ -27,23 +37,40 @@ const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    async function loadStoragedData(): Promise<void>{
-      const token = await AsyncStorage.getItem('@GoBarber:token');
-      const userWithoutPassword = await AsyncStorage.getItem('@GoBarber:user');
+  //   async function loadStoragedData(): Promise<void>{
+  //     const token = await AsyncStorage.getItem('@GoBarber:token');
+  //     const userWithoutPassword = await AsyncStorage.getItem('@GoBarber:user');
 
 
-      if(token && userWithoutPassword) {
-        setData({
-          token,
-          userWithoutPassword: JSON.parse(userWithoutPassword[1]),
-        });
-      }
-      setLoading(false);
+  //     if(token && userWithoutPassword) {
+  //       setData({
+  //         token,
+  //         userWithoutPassword: JSON.parse(userWithoutPassword[1]),
+  //       });
+  //     }
+  //     setLoading(false);
+  //   }
+
+
+  //   loadStoragedData();
+  // }, [])
+  async function loadStoragedData(): Promise<void> {
+    const [token, userWithoutPassword] = await AsyncStorage.multiGet([
+      '@GoBarber:token',
+      '@GoBarber:user',
+    ]);
+
+    if (token[1] && userWithoutPassword[1]) {
+      api.defaults.headers.authorization = `Bearer ${token[1]}`;
+
+      setData({ token: token[1], userWithoutPassword: JSON.parse(userWithoutPassword[1]) });
     }
 
+    setLoading(false);
+  }
 
-    loadStoragedData();
-  }, [])
+  loadStoragedData();
+}, []);
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', {
@@ -54,9 +81,12 @@ const AuthProvider: React.FC = ({ children }) => {
     const { token, userWithoutPassword } = response.data;
 
     await asyncStorage.multiSet([
-      ['@GoBarber:token' , token],
-      ['@GoBarber:user', JSON.stringify(userWithoutPassword) ]
-    ])
+      ['@GoBarber:token' , token[1]],
+      ['@GoBarber:user', JSON.stringify(userWithoutPassword[1]) ],
+    ]);
+
+    api.defaults.headers.authorization = `Bearer ${token[1]}`;
+
     setData({ token, userWithoutPassword });
   }, []);
 
