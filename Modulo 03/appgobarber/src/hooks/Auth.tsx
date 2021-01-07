@@ -47,6 +47,7 @@ const AuthProvider: React.FC = ({ children }) => {
   //         token,
   //         userWithoutPassword: JSON.parse(userWithoutPassword[1]),
   //       });
+  //       api.defaults.headers.authorization = `Bearer ${token[1]}`;
   //     }
   //     setLoading(false);
   //   }
@@ -81,11 +82,11 @@ const AuthProvider: React.FC = ({ children }) => {
     const { token, userWithoutPassword } = response.data;
 
     await asyncStorage.multiSet([
-      ['@GoBarber:token' , token[1]],
-      ['@GoBarber:user', JSON.stringify(userWithoutPassword[1]) ],
+      ['@GoBarber:token' , token],
+      ['@GoBarber:user', JSON.stringify(userWithoutPassword) ],
     ]);
 
-    api.defaults.headers.authorization = `Bearer ${token[1]}`;
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, userWithoutPassword });
   }, []);
