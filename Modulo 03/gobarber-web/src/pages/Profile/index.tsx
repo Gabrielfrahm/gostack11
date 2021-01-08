@@ -54,7 +54,7 @@ const Profile: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
-
+        // pedir para confirma o password e password confirmation se for informado o old password
         const {
           name,
           email,
